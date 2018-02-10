@@ -44,6 +44,7 @@
   },
   "homepage": "https://github.com/SignHash/signhash-multisig#readme",
   "devDependencies": {
+    "@digix/tempo": "^0.2.0",
     "@types/chai": "^4.0.4",
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.51",

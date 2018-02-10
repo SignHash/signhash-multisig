@@ -1,4 +1,4 @@
-import { MultisigArtifacts } from 'signhash-multisig';
+import { MultisigArtifacts } from 'multisig';
 import { Deployer } from 'truffle';
 
 declare const artifacts: MultisigArtifacts;

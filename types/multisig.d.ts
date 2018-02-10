@@ -1,4 +1,4 @@
-declare module 'signhash-multisig' {
+declare module 'multisig' {
   import { BigNumber } from 'bignumber.js';
   import {
     AnyContract,
@@ -24,7 +24,7 @@ declare module 'signhash-multisig' {
       ): Promise<TransactionResult>;
     }
 
-    interface MultiSig extends ContractBase {
+    interface Multisig extends ContractBase {
       nonce(): Promise<BigNumber>;
 
       owners(index: number): Promise<Address>;
@@ -53,7 +53,7 @@ declare module 'signhash-multisig' {
       data: string;
     }
 
-    interface TransferableMultiSig extends MultiSig {
+    interface TransferableMultisig extends Multisig {
       transferOwnership(
         v: number[],
         r: string[],
@@ -63,7 +63,7 @@ declare module 'signhash-multisig' {
       ): Promise<TransactionResult>;
     }
 
-    interface RecoverableMultiSig extends MultiSig {
+    interface RecoverableMultisig extends Multisig {
       recoveryBlockOffset(): Promise<BigNumber>;
       recoveryBlock(): Promise<BigNumber>;
       recoveryHash(): Promise<string>;
@@ -99,9 +99,38 @@ declare module 'signhash-multisig' {
       'new'(options?: TransactionOptions): Promise<Migrations>;
     }
 
+    interface MultisigContract extends Contract<Multisig> {
+      'new'(owners: Address[], options?: TransactionOptions): Promise<Multisig>;
+    }
+
+    interface RecoverableMultisigContract
+      extends Contract<RecoverableMultisig> {
+      'new'(
+        owners: Address[],
+        recoveryBlockOffset: AnyNumber,
+        options?: TransactionOptions
+      ): Promise<RecoverableMultisig>;
+    }
+
+    interface TransferableMultisigContract
+      extends Contract<TransferableMultisig> {
+      'new'(
+        owners: Address[],
+        options?: TransactionOptions
+      ): Promise<TransferableMultisig>;
+    }
+
+    interface TestERC20TokenContract extends Contract<ERC20> {
+      'new'(options?: TransactionOptions): Promise<ERC20>;
+    }
+
     interface MultisigArtifacts extends TruffleArtifacts {
       require(name: string): AnyContract;
       require(name: './Migrations.sol'): MigrationsContract;
+      require(name: './Multisig.sol'): MultisigContract;
+      require(name: './RecoverableMultisig.sol'): RecoverableMultisigContract;
+      require(name: './TransferableMultisig.sol'): TransferableMultisigContract;
+      require(name: './Test/TestERC20Token.sol'): TestERC20TokenContract;
     }
 
     interface MultisigDeployer extends Deployer {
