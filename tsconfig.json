@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "strict": true,
+    "noImplicitAny": true,
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["bignumber.js", "chai", "mocha", "node"]
+  },
+  "lib": ["es2015"],
+  "include": [
+    "migrations/*.ts",
+    "multisig/*.ts",
+    "test/*.ts",
+    "truffle-config.ts",
+    "types/*.ts",
+    "utils/*.ts"
+  ]
+}
